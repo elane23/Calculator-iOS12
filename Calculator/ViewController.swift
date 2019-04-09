@@ -10,21 +10,36 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var displayLabel: UILabel!
+    var num: String = "" {
+        didSet {
+            if let numLabel = displayLabel.text {
+                if numLabel.elementsEqual("0") {
+                    displayLabel.text = num
+                } else {
+                    displayLabel.text! += num
+                }
+            }
+        }
+    }
     
+    
+    @IBOutlet weak var displayLabel: UILabel!
     
     
     @IBAction func calcButtonPressed(_ sender: UIButton) {
         
         //What should happen when a non-number button is pressed
-    
+        displayLabel.text = "0"
     }
 
     
     @IBAction func numButtonPressed(_ sender: UIButton) {
         
         //What should happen when a number is entered into the keypad
-    
+
+        if let numValue = sender.currentTitle {
+            num = numValue
+        }
     }
 
 }
